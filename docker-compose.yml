@@ -1,4 +1,21 @@
 services:
+  app:
+    build: .
+    container_name: vacancy-management-server
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+    networks:
+      - backend
+
   db:
     image: postgres:15
     container_name: vacancy-management-db

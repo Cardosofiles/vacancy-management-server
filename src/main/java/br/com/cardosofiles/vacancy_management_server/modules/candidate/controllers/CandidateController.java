@@ -17,7 +17,7 @@ public class CandidateController {
     public void create(@Valid @RequestBody CandidateEntity candidateEntity) {
         System.out.println("Candidato");
         System.out.println(candidateEntity.getName());
-        System.out.println(candidateEntity.getUserName());
+        System.out.println(candidateEntity.getUsername());
         System.out.println(candidateEntity.getEmail());
         System.out.println(candidateEntity.getPassword());
         System.out.println(candidateEntity.getDescription());

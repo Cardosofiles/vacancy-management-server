@@ -1,10 +1,13 @@
 package br.com.cardosofiles.vacancy_management_server.modules.candidate.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import br.com.cardosofiles.vacancy_management_server.exceptions.UserFoundException;
 import br.com.cardosofiles.vacancy_management_server.modules.candidate.CandidateEntity;
+import br.com.cardosofiles.vacancy_management_server.modules.candidate.CandidateRepository;
 import jakarta.validation.Valid;
 
 
@@ -12,15 +15,18 @@ import jakarta.validation.Valid;
 @RequestMapping("/candidate")
 public class CandidateController {
 
+    @Autowired
+    private CandidateRepository candidateRepository;
 
     @PostMapping("/")
-    public void create(@Valid @RequestBody CandidateEntity candidateEntity) {
-        System.out.println("Candidato");
-        System.out.println(candidateEntity.getName());
-        System.out.println(candidateEntity.getUsername());
-        System.out.println(candidateEntity.getEmail());
-        System.out.println(candidateEntity.getPassword());
-        System.out.println(candidateEntity.getDescription());
+    public CandidateEntity create(@Valid @RequestBody CandidateEntity candidateEntity) {
+        this.candidateRepository
+                .findByUsernameOrEmail(candidateEntity.getUsername(), candidateEntity.getEmail())
+                .ifPresent((user) -> {
+                    throw new UserFoundException();
+                });
+
+        return this.candidateRepository.save(candidateEntity);
     }
 
 }

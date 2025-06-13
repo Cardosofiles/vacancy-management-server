@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +32,6 @@ public class CandidateEntity {
     @Email(message = "O campo [email] deve conter um e-mail válido")
     private String email;
 
-
     @Length(min = 10, max = 100, message = "A senha deve conter entre (10) e (100) caracteres")
     private String password;
     private String description;
@@ -39,5 +39,6 @@ public class CandidateEntity {
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdAt;
 }

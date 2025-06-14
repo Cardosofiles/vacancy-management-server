@@ -25,10 +25,12 @@ public class JobEntity {
     private String benefits;
     private String level;
 
-    @Column(name = "company_id", updatable = false)
     @ManyToOne()
-    @JoinColumn(name = "company_id")
-    private CompanyEntity companyId;
+    @JoinColumn(name = "company_id", insertable = false, updatable = false)
+    private CompanyEntity companyEntity;
+
+    @Column(name = "company_id", updatable = false)
+    private UUID companyId;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

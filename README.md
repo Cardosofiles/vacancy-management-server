@@ -1,26 +1,98 @@
-# 🚀 Infraestrutura de qualidade também é código!
+# Vacancy Management Server
 
-Hoje compartilho com vocês uma parte essencial do meu projeto Vacancy Management Server: a estrutura robusta que preparei para desenvolvimento e deploy com Docker + Spring Boot + Maven.
+Vacancy Management Server é uma aplicação backend desenvolvida em Java com Spring Boot, projetada para gerenciar vagas (vacancies) de forma eficiente, escalável e segura. O projeto utiliza Docker para facilitar o desenvolvimento, testes e deploy, além de integrar um banco de dados PostgreSQL e gerenciamento de dependências via Maven.
 
-## 🛠️ O que você vai encontrar no repositório:
+## ✨ Principais Tecnologias
 
-- `Dockerfile`: imagem de produção enxuta para rodar a aplicação com performance e segurança.
-- `Dockerfile.dev`: ambiente voltado para desenvolvimento, com hot reload e build incremental.
-- `docker-compose.yml`: orquestração dos containers com banco de dados e rede isolada.
-- `docker-compose.override.yml`: configurações customizadas para facilitar o desenvolvimento local.
-- `pom.xml`: dependências e configurações do Maven bem organizadas para build e testes automáticos.
+- **Java 17+**
+- **Spring Boot**
+- **Maven**
+- **PostgreSQL**
+- **Docker & Docker Compose**
 
-## 💡 Essa estrutura foi pensada para garantir:
+## 📦 Estrutura do Projeto
 
-- Facilidade de uso no ambiente local.
-- Escalabilidade e portabilidade do sistema.
-- Separação de preocupações entre produção e desenvolvimento.
-- Adoção de boas práticas com perfis Spring e variáveis de ambiente.
+- `Dockerfile`: Cria uma imagem enxuta para produção.
+- `Dockerfile.dev`: Ambiente de desenvolvimento com hot reload.
+- `docker-compose.yml`: Orquestração dos containers (aplicação + banco de dados).
+- `docker-compose.override.yml`: Customizações para desenvolvimento local.
+- `pom.xml`: Gerenciamento de dependências e plugins Maven.
+- `src/`: Código-fonte da aplicação.
 
-## 🔗 Confira o projeto completo no GitHub:
+## 🚀 Como Executar Localmente
 
-👉 https://www.github.com/Cardosofiles/vacancy-management-server
+### Pré-requisitos
 
-### 📌 Observações:
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Git](https://git-scm.com/)
 
-Se você trabalha com Java + Spring Boot e quer melhorar sua estrutura de containers, fica o convite para dar uma olhada, clonar e adaptar no seu próprio projeto!
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/Cardosofiles/vacancy-management-server.git
+cd vacancy-management-server
+```
+
+### 2. Configure variáveis de ambiente (opcional)
+
+Você pode criar um arquivo `.env` para customizar variáveis como usuário e senha do banco.
+
+### 3. Suba os containers
+
+Para ambiente de desenvolvimento (hot reload):
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up --build
+```
+
+Para ambiente de produção:
+
+```bash
+docker-compose up --build
+```
+
+A aplicação estará disponível em `http://localhost:8080`.
+
+### 4. Rodando testes
+
+```bash
+docker-compose exec app mvn test
+```
+
+## 🗄️ Banco de Dados
+
+O serviço PostgreSQL é iniciado automaticamente via Docker Compose. As credenciais padrão podem ser alteradas via variáveis de ambiente.
+
+## 🛠️ Principais Comandos Maven
+
+- `mvn clean install` – Compila e empacota a aplicação.
+- `mvn test` – Executa os testes automatizados.
+
+## 🧩 Estrutura de Perfis
+
+O projeto utiliza perfis Spring (`dev`, `prod`) para separar configurações de desenvolvimento e produção.
+
+## 📚 Documentação da API
+
+A documentação dos endpoints pode ser acessada (se habilitada) via `/swagger-ui.html` após subir a aplicação.
+
+## 📝 Observações
+
+- Sinta-se à vontade para clonar, adaptar e contribuir!
+- Recomenda-se o uso de variáveis de ambiente para dados sensíveis.
+
+## 🔗 Repositório
+
+[https://github.com/Cardosofiles/vacancy-management-server](https://github.com/Cardosofiles/vacancy-management-server)
+
+---
+
+<div align="center">
+  <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/git.png" alt="Git" title="Git"/></code>
+  <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/java.png" alt="Java" title="Java"/></code>
+  <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/spring_boot.png" alt="Spring Boot" title="Spring Boot"/></code>
+  <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/maven.png" alt="Maven" title="Maven"/></code>
+  <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postgresql.png" alt="PostgreSQL" title="PostgreSQL"/></code>
+  <code><img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/docker.png" alt="Docker" title="Docker"/></code>
+</div>

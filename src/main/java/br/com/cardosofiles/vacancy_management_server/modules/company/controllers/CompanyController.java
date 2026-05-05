@@ -1,4 +1,4 @@
-package br.com.cardosofiles.vacancy_management_server.modules.company.controller;
+package br.com.cardosofiles.vacancy_management_server.modules.company.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

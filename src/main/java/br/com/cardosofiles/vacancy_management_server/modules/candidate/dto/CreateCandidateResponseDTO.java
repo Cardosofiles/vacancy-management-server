@@ -2,9 +2,7 @@ package br.com.cardosofiles.vacancy_management_server.modules.candidate.dto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.Builder;
 import lombok.Data;
 

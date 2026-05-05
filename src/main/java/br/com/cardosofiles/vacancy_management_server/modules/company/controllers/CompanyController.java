@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.cardosofiles.vacancy_management_server.modules.company.entities.CompanyEntity;
+import br.com.cardosofiles.vacancy_management_server.modules.company.dto.CreateCompanyRequestDTO;
 import br.com.cardosofiles.vacancy_management_server.modules.company.services.CreateComponyService;
 import jakarta.validation.Valid;
 
@@ -19,10 +19,10 @@ public class CompanyController {
     private CreateComponyService createCompanyService;
 
     @PostMapping("/")
-    public ResponseEntity<Object> create(@Valid @RequestBody CompanyEntity companyEntity) {
+    public ResponseEntity<Object> create(@Valid @RequestBody CreateCompanyRequestDTO dto) {
 
         try {
-            var result = this.createCompanyService.execute(companyEntity);
+            var result = this.createCompanyService.execute(dto);
             return ResponseEntity.ok().body(result);
         } catch (Exception e) {
             e.printStackTrace();

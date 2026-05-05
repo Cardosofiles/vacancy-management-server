@@ -2,12 +2,11 @@ package br.com.cardosofiles.vacancy_management_server.modules.candidate.services
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.com.cardosofiles.vacancy_management_server.exceptions.UserFoundException;
-import br.com.cardosofiles.vacancy_management_server.modules.candidate.CandidateEntity;
-import br.com.cardosofiles.vacancy_management_server.modules.candidate.CandidateRepository;
 import br.com.cardosofiles.vacancy_management_server.modules.candidate.dto.CreateCandidateRequestDTO;
 import br.com.cardosofiles.vacancy_management_server.modules.candidate.dto.CreateCandidateResponseDTO;
+import br.com.cardosofiles.vacancy_management_server.modules.candidate.entities.CandidateEntity;
+import br.com.cardosofiles.vacancy_management_server.modules.candidate.repositories.CandidateRepository;
 
 @Service
 public class CreateCandidateService {
@@ -16,8 +15,7 @@ public class CreateCandidateService {
     private CandidateRepository candidateRepository;
 
     public CreateCandidateResponseDTO execute(CreateCandidateRequestDTO dto) {
-        this.candidateRepository
-                .findByUsernameOrEmail(dto.getUsername(), dto.getEmail())
+        this.candidateRepository.findByUsernameOrEmail(dto.getUsername(), dto.getEmail())
                 .ifPresent((user) -> {
                     throw new UserFoundException();
                 });
@@ -32,14 +30,9 @@ public class CreateCandidateService {
 
         var saved = this.candidateRepository.save(entity);
 
-        return CreateCandidateResponseDTO.builder()
-                .id(saved.getId())
-                .name(saved.getName())
-                .username(saved.getUsername())
-                .email(saved.getEmail())
-                .description(saved.getDescription())
-                .curriculum(saved.getCurriculum())
-                .createdAt(saved.getCreatedAt())
-                .build();
+        return CreateCandidateResponseDTO.builder().id(saved.getId()).name(saved.getName())
+                .username(saved.getUsername()).email(saved.getEmail())
+                .description(saved.getDescription()).curriculum(saved.getCurriculum())
+                .createdAt(saved.getCreatedAt()).build();
     }
 }

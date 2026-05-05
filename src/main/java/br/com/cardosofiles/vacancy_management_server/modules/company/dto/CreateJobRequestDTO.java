@@ -1,7 +1,6 @@
 package br.com.cardosofiles.vacancy_management_server.modules.company.dto;
 
 import java.util.UUID;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

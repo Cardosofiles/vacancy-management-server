@@ -18,6 +18,8 @@ public class CreateCandidateRequestDTO {
     @Email(message = "O campo [email] deve conter um e-mail válido")
     private String email;
 
+    @NotBlank(message = "O campo [password] é obrigatório")
+    @Pattern(regexp = "\\S+", message = "O campo [password] não deve conter espaço")
     @Length(min = 10, max = 100, message = "A senha deve conter entre (10) e (100) caracteres")
     private String password;
 

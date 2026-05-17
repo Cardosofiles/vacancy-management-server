@@ -2,8 +2,7 @@ package br.com.cardosofiles.vacancy_management_server.modules.company.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.com.cardosofiles.vacancy_management_server.exceptions.UserFoundException;
+import br.com.cardosofiles.vacancy_management_server.exceptions.CompanyFoundException;
 import br.com.cardosofiles.vacancy_management_server.modules.company.dto.CreateCompanyRequestDTO;
 import br.com.cardosofiles.vacancy_management_server.modules.company.dto.CreateCompanyResponseDTO;
 import br.com.cardosofiles.vacancy_management_server.modules.company.entities.CompanyEntity;
@@ -18,10 +17,9 @@ public class CreateComponyService {
 
     public CreateCompanyResponseDTO execute(CreateCompanyRequestDTO dto) {
 
-        this.companyRepository
-                .findByUsernameOrEmail(dto.getUsername(), dto.getEmail())
+        this.companyRepository.findByUsernameOrEmail(dto.getUsername(), dto.getEmail())
                 .ifPresent((user) -> {
-                    throw new UserFoundException();
+                    throw new CompanyFoundException();
                 });
 
         var entity = new CompanyEntity();
@@ -34,15 +32,9 @@ public class CreateComponyService {
 
         var saved = this.companyRepository.save(entity);
 
-        return CreateCompanyResponseDTO.builder()
-                .id(saved.getId())
-                .username(saved.getUsername())
-                .email(saved.getEmail())
-                .website(saved.getWebsite())
-                .name(saved.getName())
-                .description(saved.getDescription())
-                .createdAt(saved.getCreatedAt())
-                .build();
+        return CreateCompanyResponseDTO.builder().id(saved.getId()).username(saved.getUsername())
+                .email(saved.getEmail()).website(saved.getWebsite()).name(saved.getName())
+                .description(saved.getDescription()).createdAt(saved.getCreatedAt()).build();
     }
 
 }
